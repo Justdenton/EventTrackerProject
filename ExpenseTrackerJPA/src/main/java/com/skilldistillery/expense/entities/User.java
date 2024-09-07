@@ -32,7 +32,15 @@ public class User {
 
 	private String email;
 	
+	// expense date (json formatting)->
+	
+	
 //	@CreationTimestamp					// Specific to Hibernate 
+//	@Column(name = "create_time")
+//	private LocalDateTime createTime;
+	
+	// UPDATE
+//	@UpdateTimestamp					// Specific to Hibernate 
 //	@Column(name = "create_time")
 //	private LocalDateTime createTime;
 	

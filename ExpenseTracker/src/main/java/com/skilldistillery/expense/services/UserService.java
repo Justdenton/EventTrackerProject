@@ -10,7 +10,7 @@ public interface UserService {
 	User showUser(int userId);
 	User create(User user);
 	User update(int userId, User updateUser);
-	boolean delete(int userId); // or enable** Need to double check default behavior in database
+	boolean delete(int userId); // or enable** Need to double check default behavior in database 
 	
 
 }

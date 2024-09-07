@@ -18,6 +18,11 @@ public class UserServiceImpl implements UserService{
 	public List<User> getAllUsers(){
 		return userRepo.findAll();
 	}
+	
+//	@Override
+//	public List<User> getAllUsersEnabled(){
+//		return userRepo.findbyEnabledTrue();
+//	}
 
 	@Override
 	public User showUser(int userId) {

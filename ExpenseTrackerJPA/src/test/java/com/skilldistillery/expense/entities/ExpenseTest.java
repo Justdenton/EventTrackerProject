@@ -1,8 +1,6 @@
 package com.skilldistillery.expense.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -14,11 +12,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class UserTest {
+class ExpenseTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Expense expense;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,7 +31,7 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		expense = em.find(Expense.class, 1);
 	}
 
 	@AfterEach
@@ -41,19 +39,10 @@ class UserTest {
 		em.close();
 	}
 
-	@Test
-	void test_User_entity_mapping() {
-		assertNotNull(user);
-		assertEquals("Test", user.getFirstName());
-		assertEquals("Tester", user.getLastName());
-		assertEquals("test", user.getUsername());
-	}
-
 //	@Test
-//	void test_User_OneToMany OR METHODNAME() {
-//		assertNotNull(user);
-//		assertEquals("Test", user.getFirstName());
-//		assertEquals("Tester", user.getLastName());
-//		assertEquals("test", user.getUsername());
+//	void test_Expense_entity_mapping() {
+//		assertNotNull(expense);
+//		assertEquals("Test", expense.g);
 //	}
+
 }

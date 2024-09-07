@@ -7,9 +7,9 @@
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-		<!-- <class>com.skilldistillery.expense.entities.Category</class>
+		<class>com.skilldistillery.expense.entities.Category</class>
 		<class>com.skilldistillery.expense.entities.Expense</class>
-		<class>com.skilldistillery.expense.entities.PaymentMethod</class> -->
+		<class>com.skilldistillery.expense.entities.PaymentMethod</class>
 		<class>com.skilldistillery.expense.entities.User</class>
 
 		<properties>
