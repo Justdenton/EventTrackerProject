@@ -9,6 +9,7 @@ import com.skilldistillery.expense.entities.Expense;
 public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
 	List<Expense> findByCategoryId(int categoryId);
+	List<Expense> findByPaymentId(int paymentId); 
 	
 
 }
