@@ -1,6 +1,7 @@
 package com.skilldistillery.expense.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +28,9 @@ public class PaymentMethod {
 	@CreationTimestamp
 	@Column(name = "create_time")
 	private LocalDateTime createTime;
+
+	@OneToMany(mappedBy = "paymentMethod")
+	private List<Expense> expenses;
 
 	public PaymentMethod() {
 		super();
@@ -60,6 +65,14 @@ public class PaymentMethod {
 
 	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
+	}
+
+	public List<Expense> getExpenses() {
+		return expenses;
+	}
+
+	public void setExpenses(List<Expense> expenses) {
+		this.expenses = expenses;
 	}
 
 	@Override

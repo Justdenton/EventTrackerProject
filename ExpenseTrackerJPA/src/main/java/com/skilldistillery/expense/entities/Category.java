@@ -1,11 +1,13 @@
 package com.skilldistillery.expense.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +21,9 @@ public class Category {
 	private String name;
 
 	private String description;
+
+	@OneToMany(mappedBy = "category")
+	private List<Expense> expenses;
 
 	public Category() {
 		super();
@@ -53,6 +58,14 @@ public class Category {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Expense> getExpenses() {
+		return expenses;
+	}
+
+	public void setExpenses(List<Expense> expenses) {
+		this.expenses = expenses;
 	}
 
 	@Override
