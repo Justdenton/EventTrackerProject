@@ -2,9 +2,9 @@
 
 ## **Overview**
 
-- Homework for Skill Distillery - Week 12
-
-The Event Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform fundamental CRUD operations. 
+| Homework (Week 12) - Skill Distillery   |
+|-----------------------------------------|
+| The Event Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform fundamental CRUD operations. |
 
 This project TO DO WHY
 
@@ -12,9 +12,7 @@ This project TO DO WHY
 
 - TO DO
 
-### **Rest Enpoints**
-
-- TO DO
+### **Rest Endpoints**
 
 | HTTP Verb | URI                  | Request Body | Response Body | Response Codes |
 |-----------|----------------------|--------------|---------------|---------|
@@ -27,6 +25,7 @@ This project TO DO WHY
 
 ### **Methodologies Used:**
 - TO DO
+- topic branching (methodology section?)
 
 ## **Technologies Used**
 - Java
@@ -41,10 +40,9 @@ This project TO DO WHY
 
 ## **Lessons Learned** 
 - TODO
+- Remaining mindful of imports.
+- Resource Naming TODO
 
-
-
-- topic branching (methodology section?)
 
 ## **Resources**
 - https://github.com/SkillDistillery/SD44/blob/main/rest/EventTracker/README.md

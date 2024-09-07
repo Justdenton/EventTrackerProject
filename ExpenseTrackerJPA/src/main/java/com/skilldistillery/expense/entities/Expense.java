@@ -6,6 +6,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,29 +37,36 @@ public class Expense {
 	private LocalDateTime updateTime;
 
 	// ( each expense - related to 1 user )
+	@JsonIgnoreProperties({"expenses"})
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonIgnoreProperties({"expenses"})
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 
+	@JsonIgnoreProperties({"expenses"})
 	@ManyToOne
 	@JoinColumn(name = "payment_method_id")
 	private PaymentMethod paymentMethod;
 
 	public Expense() {
-		super();
+		super(); 
 	}
 
-	public Expense(int id, double amount, String description, LocalDateTime createTime, LocalDateTime updateTime) {
+	public Expense(int id, double amount, String description, LocalDateTime createTime, LocalDateTime updateTime,
+			User user, Category category, PaymentMethod paymentMethod) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.description = description;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
+		this.user = user;
+		this.category = category;
+		this.paymentMethod = paymentMethod;
 	}
 
 	public int getId() {

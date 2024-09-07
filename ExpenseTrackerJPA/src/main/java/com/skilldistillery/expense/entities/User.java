@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,6 +46,7 @@ public class User {
 	private boolean active;
 
 	// ( each user - related to many expenses )
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Expense> expenses;
 
@@ -51,7 +54,8 @@ public class User {
 		super();
 	}
 
-	public User(int id, String firstName, String lastName, String username, String password, String email) {
+	public User(int id, String firstName, String lastName, String username, String password, String email,
+			LocalDateTime createTime, LocalDateTime updateTime, boolean active, List<Expense> expenses) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -59,7 +63,10 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
 		this.active = active;
+		this.expenses = expenses;
 	}
 
 	public int getId() {

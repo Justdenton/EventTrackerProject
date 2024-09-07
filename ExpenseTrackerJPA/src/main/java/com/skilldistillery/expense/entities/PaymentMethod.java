@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class PaymentMethod {
 	@Column(name = "create_time")
 	private LocalDateTime createTime;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "paymentMethod")
 	private List<Expense> expenses;
 
@@ -36,11 +39,12 @@ public class PaymentMethod {
 		super();
 	}
 
-	public PaymentMethod(int id, String name, LocalDateTime createTime) {
+	public PaymentMethod(int id, String name, LocalDateTime createTime, List<Expense> expenses) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.createTime = createTime;
+		this.expenses = expenses;
 	}
 
 	public int getId() {

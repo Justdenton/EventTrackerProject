@@ -3,6 +3,8 @@ package com.skilldistillery.expense.entities;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +24,7 @@ public class Category {
 
 	private String description;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private List<Expense> expenses;
 
@@ -29,11 +32,12 @@ public class Category {
 		super();
 	}
 
-	public Category(int id, String name, String description) {
+	public Category(int id, String name, String description, List<Expense> expenses) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.expenses = expenses;
 	}
 
 	public int getId() {
