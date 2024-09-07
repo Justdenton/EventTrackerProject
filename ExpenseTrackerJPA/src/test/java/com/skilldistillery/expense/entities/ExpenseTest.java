@@ -39,10 +39,11 @@ class ExpenseTest {
 		em.close();
 	}
 
-//	@Test
-//	void test_Expense_entity_mapping() {
-//		assertNotNull(expense);
-//		assertEquals("Test", expense.g);
-//	}
+	@Test
+	void test_Expense_entity_mapping() {
+		assertNotNull(expense);
+		assertEquals(10.10, expense.getAmount());
+		assertEquals("Walmart - grocery and shoes", expense.getDescription());
+	}
 
 }

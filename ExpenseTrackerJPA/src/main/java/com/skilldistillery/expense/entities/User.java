@@ -1,15 +1,18 @@
 package com.skilldistillery.expense.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,23 +30,22 @@ public class User {
 	private String lastName;
 
 	private String username;
-
 	private String password;
-
 	private String email;
-	
-	// expense date (json formatting)->
-	
-	
-//	@CreationTimestamp					// Specific to Hibernate 
-//	@Column(name = "create_time")
-//	private LocalDateTime createTime;
-	
-	// UPDATE
-//	@UpdateTimestamp					// Specific to Hibernate 
-//	@Column(name = "create_time")
-//	private LocalDateTime createTime;
-	
+
+	@CreationTimestamp
+	@Column(name = "create_time")
+	private LocalDateTime createTime;
+
+	@UpdateTimestamp
+	@Column(name = "update_time")
+	private LocalDateTime updateTime;
+
+	private boolean active;
+
+	// ( each user - related to many expenses )
+	@OneToMany(mappedBy = "user")
+	private List<Expense> expenses;
 
 	public User() {
 		super();
@@ -57,6 +59,7 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.active = active;
 	}
 
 	public int getId() {
@@ -107,6 +110,38 @@ public class User {
 		this.email = email;
 	}
 
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public LocalDateTime getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(LocalDateTime updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public List<Expense> getExpenses() {
+		return expenses;
+	}
+
+	public void setExpenses(List<Expense> expenses) {
+		this.expenses = expenses;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -129,7 +164,8 @@ public class User {
 		StringBuilder builder = new StringBuilder();
 		builder.append("User [id=").append(id).append(", firstName=").append(firstName).append(", lastName=")
 				.append(lastName).append(", username=").append(username).append(", password=").append(password)
-				.append(", email=").append(email).append("]");
+				.append(", email=").append(email).append(", createTime=").append(createTime).append(", updateTime=")
+				.append(updateTime).append(", active=").append(active).append("]");
 		return builder.toString();
 	}
 

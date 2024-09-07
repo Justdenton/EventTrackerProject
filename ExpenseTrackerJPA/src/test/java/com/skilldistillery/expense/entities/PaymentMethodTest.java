@@ -39,10 +39,11 @@ class PaymentMethodTest {
 		em.close();
 	}
 
-//	@Test
-//	void test_PaymentMethod_entity_mapping() {
-//		assertNotNull(pm);
-//		assertEquals("Test", pm.g);
-//	}
+	@Test
+	void test_PaymentMethod_entity_mapping() {
+		assertNotNull(pm);
+		assertEquals(1, pm.getId());
+		assertEquals("Cash", pm.getName());
+	}
 
 }
