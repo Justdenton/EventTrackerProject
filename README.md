@@ -8,6 +8,8 @@
 | A front-end will be developed next week to interact with the API. |
 
 ### **Rest Endpoints**
+- https://www.postman.com/downloads/
+- http://justdentondevelops.com/
 
 | HTTP Verb | URI                                         | Request Body                             | Response Body                                  | Response Codes  |
 |-----------|---------------------------------------------|------------------------------------------|------------------------------------------------|-----------------|
@@ -18,8 +20,6 @@
 | POST      | `/api/expenses`                             | Representation of a new _expense_        | Representation of the created expense          | 201, 400        |
 | PUT       | `/api/expenses/{expenseId}`                 | Representation of an updated _expense_   | Representation of the updated expense          | 200, 404, 400   |
 | DELETE    | `/api/expenses/{expenseId}`                 |                                          |                                                | 204, 404, 400   |
-
-- https://www.postman.com/downloads/
 
 ### **Methodologies Used:**
 - **RESTful Design:**

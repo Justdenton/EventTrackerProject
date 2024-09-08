@@ -6,9 +6,10 @@ import com.skilldistillery.expense.entities.Expense;
 
 public interface ExpenseService {
 
+	List<Expense> getAllExpenses();
+
 	Expense getExpenseById(int expenseId);
 	
-	List<Expense> getAllExpenses();
 
 	List<Expense> getExpensesByCategory(int categoryId);
 	// List<Expense> getExpensesByCategoryName(String categoryName);
