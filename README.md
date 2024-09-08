@@ -19,9 +19,15 @@
 | PUT       | `/api/expenses/{expenseId}`                 | Representation of an updated _expense_   | Representation of the updated expense          | 200, 404, 400   |
 | DELETE    | `/api/expenses/{expenseId}`                 |                                          |                                                | 204, 404, 400   |
 
+- https://www.postman.com/downloads/
+
 ### **Methodologies Used:**
-- RESTful Design
+- **RESTful Design:**
+  - Created an API with clear endpoints that represent resources.
+  - Followed best practices for resource naming conventions to create readable and predictable URIs.
 - Test-Driven Development (TDD)
+  - Used JUnit to verify entity mappings.
+  - TODO - stretch
 
 ## **Technologies Used**
 - Java
@@ -33,9 +39,11 @@
 - Postman
  
 ## **Lessons Learned** 
-- Understanding APIs: 
-- Resource Naming: 
-- Error Handling: 
+- **Understanding MySQL Workbench**
+  - Gained experience with designing and visualizing database schemas.
+- **Understanding APIs:** 
+  - Gained experience with how to structure APIs to serve as a bridge between backend systems and (future) frontend applications.
+  - Tested - using Postman to verify all CRUD operations and potential errors.
 
 ## **Resources**
 - https://github.com/SkillDistillery/SD44/blob/main/rest/EventTracker/README.md
