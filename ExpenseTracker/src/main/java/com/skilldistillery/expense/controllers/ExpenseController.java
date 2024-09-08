@@ -3,9 +3,11 @@ package com.skilldistillery.expense.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,30 +70,12 @@ public class ExpenseController {
 	}
 
 	// CREATE
-	/*
-	 * 	JSON (POST)
-	 
- 	 	{
-    	"amount": 10.95,
-    	"description": "Walmart - grocery and shoes TESTING ADD",
-    	"user": {
-        "id": 1
-    	},
-    	"category": {
-        "id": 1
-    	},
-    	"paymentMethod": {
-        "id": 1
-    	}
-		}
-		
-	 */
 	// http://localhost:8086/api/expenses
 	@PostMapping("expenses")
 	public Expense createExpense(@RequestBody Expense expense, HttpServletResponse res, HttpServletRequest req) {
 		Expense createdExpense = expenseService.create(expense);
 		if (createdExpense == null) {
-			res.setStatus(400); 
+			res.setStatus(400);
 		} else {
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
@@ -99,10 +83,40 @@ public class ExpenseController {
 		}
 		return createdExpense;
 	}
-	
 
 	// UPDATE
+	// http://localhost:8086/api/expenses/6
+	@PutMapping("expenses/{expenseId}")
+	public Expense updateExpense(@PathVariable("expenseId") int expenseId, @RequestBody Expense expense,
+			HttpServletResponse res) {
+		try {
+			Expense updatedExpense = expenseService.update(expenseId, expense);
+			if (updatedExpense == null) {
+				res.setStatus(404);
+			} else {
+				res.setStatus(200);
+			}
+			return updatedExpense;
+		} catch (Exception e) {
+			res.setStatus(400);
+			return null;
+		}
+	}
 
 	// DELETE
+	@DeleteMapping("expenses/{expenseId}")
+	public void deleteExpense(@PathVariable("expenseId") int expenseId, HttpServletResponse res) {
+		try {
+			boolean deleted = expenseService.delete(expenseId);
+			if (deleted) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+	}
 
 }

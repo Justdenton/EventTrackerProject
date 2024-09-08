@@ -31,7 +31,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 	@Override
 	public Expense getExpenseById(int expenseId) {
 		Optional<Expense> expenseOpt = expenseRepo.findById(expenseId);
-		return expenseOpt.orElse(null); 
+		return expenseOpt.orElse(null);
 	}
 
 	@Override
@@ -69,11 +69,16 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	@Override
 	public Expense update(int expenseId, Expense updateExpense) {
-		if (expenseRepo.existsById(expenseId)) {
+		Optional<Expense> existingExpenseOpt = expenseRepo.findById(expenseId);
+		if (existingExpenseOpt.isPresent()) {
+			Expense existingExpense = existingExpenseOpt.get();
+
+			// Create Time bug in JSON (null issue in console) 
+			updateExpense.setCreateTime(existingExpense.getCreateTime());
 			updateExpense.setId(expenseId);
 			return expenseRepo.save(updateExpense);
 		}
-		return null;
+		return null; 
 	}
 
 	@Override
