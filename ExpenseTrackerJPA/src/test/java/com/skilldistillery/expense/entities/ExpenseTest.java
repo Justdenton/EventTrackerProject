@@ -46,4 +46,29 @@ class ExpenseTest {
 		assertEquals("Walmart - grocery and shoes", expense.getDescription());
 	}
 
+	@Test
+	void test_Expense_ManyToOne_User() {
+		assertNotNull(expense);
+		assertNotNull(expense.getUser());
+		assertEquals(1, expense.getUser().getId());
+		assertEquals("Test", expense.getUser().getFirstName());
+		assertEquals("Tester", expense.getUser().getLastName());
+	}
+
+	@Test
+	void test_Expense_Category_mapping() {
+		assertNotNull(expense);
+		assertNotNull(expense.getCategory());
+		assertEquals(2, expense.getCategory().getId());
+		assertEquals("Grocery", expense.getCategory().getName());
+	}
+
+	@Test
+	void test_Expense_PaymentMethod_mapping() {
+		assertNotNull(expense);
+		assertNotNull(expense.getPaymentMethod());
+		assertEquals(1, expense.getPaymentMethod().getId());
+		assertEquals("Cash", expense.getPaymentMethod().getName());
+	}
+
 }

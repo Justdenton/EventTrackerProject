@@ -6,15 +6,17 @@ import com.skilldistillery.expense.entities.Expense;
 
 public interface ExpenseService {
 
+	Expense getExpenseById(int expenseId);
+	
 	List<Expense> getAllExpenses();
 
-	// NEED TO FIX - should be - String category? 
-		//	http://localhost:8086/api/expenses/categories/4		VS		http://localhost:8086/api/expenses/categories/food				USER EXPERIENCE
 	List<Expense> getExpensesByCategory(int categoryId);
-	List<Expense> getExpensesByPaymentMethod(int paymentId);
+	// List<Expense> getExpensesByCategoryName(String categoryName);
+
+	List<Expense> getExpensesByPaymentMethod(int paymentMethodId);
 
 	Expense create(Expense expense);
 	Expense update(int expenseId, Expense updateExpense);
-	boolean delete(int expenseId); 
+	boolean delete(int expenseId);
 
 }

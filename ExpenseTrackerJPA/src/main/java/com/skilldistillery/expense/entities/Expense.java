@@ -36,24 +36,25 @@ public class Expense {
 	@Column(name = "update_time")
 	private LocalDateTime updateTime;
 
-	// ( each expense - related to 1 user )
-	@JsonIgnoreProperties({"expenses"})
+	// ( each expense - related to 1: ==========
+	@JsonIgnoreProperties({ "expenses" })
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@JsonIgnoreProperties({"expenses"})
+	@JsonIgnoreProperties({ "expenses" })
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	@JsonIgnoreProperties({"expenses"})
+	@JsonIgnoreProperties({ "expenses" })
 	@ManyToOne
 	@JoinColumn(name = "payment_method_id")
 	private PaymentMethod paymentMethod;
+	// =========================================
 
 	public Expense() {
-		super(); 
+		super();
 	}
 
 	public Expense(int id, double amount, String description, LocalDateTime createTime, LocalDateTime updateTime,

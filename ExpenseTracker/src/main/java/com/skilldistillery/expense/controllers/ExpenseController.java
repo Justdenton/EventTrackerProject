@@ -19,54 +19,58 @@ import jakarta.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("api")
 public class ExpenseController {
-	
+
 	@Autowired
 	private ExpenseService expenseService;
-	
-	//	http://localhost:8086/api/expenses 
-	@GetMapping("expenses")
-	public List<Expense> getExpenseList(){
+
+	// http://localhost:8086/api/expenses
+	@GetMapping({ "expenses", "expenses/" })
+	public List<Expense> getExpenseList() {
 		return expenseService.getAllExpenses();
 	}
-	
-	// http://localhost:8086/api/expenses/categories/4
+
+	// http://localhost:8086/api/expenses/1
+	@GetMapping("expenses/{expenseId}")
+	public Expense expenseSearch(@PathVariable("expenseId") int expenseId, HttpServletResponse res) {
+		Expense expense = expenseService.getExpenseById(expenseId);
+		if (expense == null) {
+			res.setStatus(404);
+		} else {
+			res.setStatus(200);
+		}
+		return expense;
+	}
+
+	// http://localhost:8086/api/expenses/categories/1
 	@GetMapping("expenses/categories/{categoryId}")
-	public List<Expense> categorySearch(@PathVariable("categoryId") int categoryId, HttpServletResponse res){
+	public List<Expense> categorySearch(@PathVariable("categoryId") int categoryId, HttpServletResponse res) {
 		List<Expense> expenses = expenseService.getExpensesByCategory(categoryId);
 		if (expenses == null || expenses.isEmpty()) {
 			res.setStatus(404);
+			return null;
+		} else {
+			res.setStatus(200);
+			return expenses;
 		}
-		res.setStatus(200);
-		return expenses;
 	}
-	
-	// http://localhost:8086/api/expenses/payments/4
-//	@GetMapping("expenses/payments/{paymentId}")
-//	public List<Expense> paymentSearch(@PathVariable("paymentId") int paymentId, HttpServletResponse res){
-//		List<Expense> expenses = expenseService.getExpensesByPaymentMethod(paymentId); 
-//		if (expenses == null || expenses.isEmpty()) {
-//			res.setStatus(404);
-//		}
-//		res.setStatus(200);
-//		return expenses; 
-//	}
-	
+
+	// http://localhost:8086/api/expenses/payments/1
+	@GetMapping("expenses/payments/{paymentMethodId}")
+	public List<Expense> paymentSearch(@PathVariable("paymentMethodId") int paymentMethodId, HttpServletResponse res) {
+		List<Expense> expenses = expenseService.getExpensesByPaymentMethod(paymentMethodId);
+		if (expenses == null || expenses.isEmpty()) {
+			res.setStatus(404);
+			return null;
+		} else {
+			res.setStatus(200);
+			return expenses;
+		}
+	}
+
 	// CREATE
-//	@PostMapping({ "expenses", "expenses/" })
-//	public Expense createExpense(@RequestBody Expense expense, HttpServletResponse res, HttpServletRequest req) {
-//		try {
-//			expense = expenseService.create(expense);
-//			res.setStatus(201);
-//			StringBuffer url = req.getRequestURL();
-//			res.setHeader("Location", url.append("/").append(expense.getId()).toString());
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			res.setStatus(400);
-//			expense = null;
-//		}
-//		return expense;
-//	}
-	
-	
+
+	// UPDATE
+
+	// DELETE
+
 }

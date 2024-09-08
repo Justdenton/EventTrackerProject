@@ -49,12 +49,4 @@ class UserTest {
 		assertEquals("Tester", user.getLastName());
 		assertEquals("test", user.getUsername());
 	}
-
-//	@Test
-//	void test_User_OneToMany_etc {
-//		assertNotNull(user);
-//		assertEquals("Test", user.getFirstName());
-//		assertEquals("Tester", user.getLastName());
-//		assertEquals("test", user.getUsername());
-//	}
 }

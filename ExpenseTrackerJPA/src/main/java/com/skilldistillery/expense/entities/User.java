@@ -45,7 +45,6 @@ public class User {
 
 	private boolean active;
 
-	// ( each user - related to many expenses )
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Expense> expenses;

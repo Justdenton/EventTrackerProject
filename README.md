@@ -2,47 +2,40 @@
 
 ## **Overview**
 
-| Homework (Week 12) - Skill Distillery   |
-|-----------------------------------------|
-| The Event Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform fundamental CRUD operations. |
-
-This project TO DO WHY
-
-### **How to Run:**
-
-- TO DO
+| **Homework (Week 12) - Skill Distillery** |
+|-------------------------------------------|
+| The Event Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. |
+| A front-end will be developed next week to interact with the API. |
 
 ### **Rest Endpoints**
 
-| HTTP Verb | URI                  | Request Body | Response Body | Response Codes |
-|-----------|----------------------|--------------|---------------|---------|
-| GET       | `/api/expenses`      |              | List Expenses | 200 |
-| GET       | `/api/expenses/3`   |              | Representation of _expense_ `3` | 200, 404 |
-| POST      | `/api/expenses`      | Representation of a new _expense_ resource | Representation of a created expense | 201, 400|
-| PUT       | `/api/expenses/3`   | Representation of a new version of _expense_ `3` | Representation of updated expense | 200, 404, 400 |
-| DELETE    | `/api/expenses/3`   |              | | 204, 404, 400 |
-
+| HTTP Verb | URI                                         | Request Body                             | Response Body                                  | Response Codes  |
+|-----------|---------------------------------------------|------------------------------------------|------------------------------------------------|-----------------|
+| GET       | `/api/expenses`                             |                                          | List of all expenses                           | 200             |
+| GET       | `/api/expenses/{expenseId}`                 |                                          | Representation of a specific expense           | 200, 404        |
+| GET       | `/api/expenses/categories/{categoryId}`     |                                          | List of expenses for a specific category       | 200, 404        |
+| GET       | `/api/expenses/payments/{paymentMethodId}`  |                                          | List of expenses for a specific payment method | 200, 404        |
+| POST      | `/api/expenses`                             | Representation of a new _expense_        | Representation of the created expense          | 201, 400        |
+| PUT       | `/api/expenses/{expenseId}`                 | Representation of an updated _expense_   | Representation of the updated expense          | 200, 404, 400   |
+| DELETE    | `/api/expenses/{expenseId}`                 |                                          |                                                | 204, 404, 400   |
 
 ### **Methodologies Used:**
-- TO DO
-- topic branching (methodology section?)
+- RESTful Design
+- Test-Driven Development (TDD)
 
 ## **Technologies Used**
 - Java
-- STS: Spring Tool Suite
+- Spring Boot
 - JPA: Java Persistence API
 - MySQL, MySQL Workbench
 - AWS
 - git, GitHub
 - Postman
-
-- TODO
-
+ 
 ## **Lessons Learned** 
-- TODO
-- Remaining mindful of imports.
-- Resource Naming TODO
-
+- Understanding APIs: 
+- Resource Naming: 
+- Error Handling: 
 
 ## **Resources**
 - https://github.com/SkillDistillery/SD44/blob/main/rest/EventTracker/README.md
