@@ -68,6 +68,38 @@ public class ExpenseController {
 	}
 
 	// CREATE
+	/*
+	 * 	JSON (POST)
+	 
+ 	 	{
+    	"amount": 10.95,
+    	"description": "Walmart - grocery and shoes TESTING ADD",
+    	"user": {
+        "id": 1
+    	},
+    	"category": {
+        "id": 1
+    	},
+    	"paymentMethod": {
+        "id": 1
+    	}
+		}
+		
+	 */
+	// http://localhost:8086/api/expenses
+	@PostMapping("expenses")
+	public Expense createExpense(@RequestBody Expense expense, HttpServletResponse res, HttpServletRequest req) {
+		Expense createdExpense = expenseService.create(expense);
+		if (createdExpense == null) {
+			res.setStatus(400); 
+		} else {
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			res.setHeader("Location", url.append("/").append(createdExpense.getId()).toString());
+		}
+		return createdExpense;
+	}
+	
 
 	// UPDATE
 
