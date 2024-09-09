@@ -4,8 +4,8 @@
 
 | **Homework (Week 12) - Skill Distillery** |
 |-------------------------------------------|
-| The Event Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. |
-| A front-end will be developed next week to interact with the API. |
+| The Expense Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. |
+| A front-end will be developed next week to interact with the API. The database schema will evolve as the project's scope expands. |
 
 ![Database Schema](./images/event_tracker_schema_wide.png)
 
