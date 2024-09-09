@@ -12,7 +12,7 @@
 ### **Rest Endpoints**
 - **Test with Postman:**
   - https://www.postman.com/downloads/
-- **AWS Deployment: **  
+- **AWS Deployment:**  
   - http://justdentondevelops.com/
 
 | HTTP Verb | URI                                         | Request Body                             | Response Body                                  | Response Codes  |
