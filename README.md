@@ -7,9 +7,13 @@
 | The Event Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. |
 | A front-end will be developed next week to interact with the API. |
 
+![Database Schema](./images/event_tracker_schema.png)
+
 ### **Rest Endpoints**
-- https://www.postman.com/downloads/
-- http://justdentondevelops.com/
+- **Test with Postman:**
+  - https://www.postman.com/downloads/
+- **AWS Deployment: **  
+  - http://justdentondevelops.com/
 
 | HTTP Verb | URI                                         | Request Body                             | Response Body                                  | Response Codes  |
 |-----------|---------------------------------------------|------------------------------------------|------------------------------------------------|-----------------|
@@ -27,7 +31,6 @@
   - Followed best practices for resource naming conventions to create readable and predictable URIs.
 - **Test-Driven Development (TDD)**
   - Used JUnit to verify entity mappings.
-  - TODO - stretch
 
 ## **Technologies Used**
 - Java
@@ -40,8 +43,6 @@
  
 ## **Lessons Learned** 
 - **Understanding MySQL Workbench**
-  - Gained experience with designing and visualizing database schemas.
-  - ![Database Schema](./images/event_tracker_schema.png) 
 - **Understanding APIs:** 
   - Gained experience with how to structure APIs to serve as a bridge between backend systems and (future) frontend applications.
   - Tested, using Postman to verify all CRUD operations and potential errors.
