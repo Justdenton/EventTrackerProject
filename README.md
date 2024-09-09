@@ -41,7 +41,7 @@
 ## **Lessons Learned** 
 - **Understanding MySQL Workbench**
   - Gained experience with designing and visualizing database schemas.
-  - ![Database Schema] (./images/event_tracker_schema.png) 
+  - ![Database Schema](./images/event_tracker_schema.png) 
 - **Understanding APIs:** 
   - Gained experience with how to structure APIs to serve as a bridge between backend systems and (future) frontend applications.
   - Tested, using Postman to verify all CRUD operations and potential errors.
