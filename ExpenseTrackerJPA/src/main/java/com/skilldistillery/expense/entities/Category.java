@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +25,9 @@ public class Category {
 
 	private String description;
 
+	@Column(name = "enabled")
+	private Boolean enabled = true;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private List<Expense> expenses;
@@ -32,11 +36,12 @@ public class Category {
 		super();
 	}
 
-	public Category(int id, String name, String description, List<Expense> expenses) {
+	public Category(int id, String name, String description, Boolean enabled, List<Expense> expenses) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.enabled = enabled;
 		this.expenses = expenses;
 	}
 
@@ -72,6 +77,14 @@ public class Category {
 		this.expenses = expenses;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -93,7 +106,7 @@ public class Category {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Category [id=").append(id).append(", name=").append(name).append(", description=")
-				.append(description).append("]");
+				.append(description).append(", enabled=").append(enabled).append("]");
 		return builder.toString();
 	}
 

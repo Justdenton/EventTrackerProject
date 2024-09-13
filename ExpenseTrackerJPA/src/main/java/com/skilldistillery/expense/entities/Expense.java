@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,6 +37,9 @@ public class Expense {
 	@Column(name = "update_time")
 	private LocalDateTime updateTime;
 
+	@Column(name = "enabled")
+	private Boolean enabled = true;
+
 	// ( each expense - related to 1: ==========
 	@JsonIgnoreProperties({ "expenses" })
 	@ManyToOne
@@ -51,6 +55,11 @@ public class Expense {
 	@ManyToOne
 	@JoinColumn(name = "payment_method_id")
 	private PaymentMethod paymentMethod;
+
+	@JsonIgnoreProperties({ "expense" })
+	@OneToOne(mappedBy = "expense")
+	private RecurringTransaction recurringTransaction;
+
 	// =========================================
 
 	public Expense() {
@@ -58,16 +67,19 @@ public class Expense {
 	}
 
 	public Expense(int id, double amount, String description, LocalDateTime createTime, LocalDateTime updateTime,
-			User user, Category category, PaymentMethod paymentMethod) {
+			Boolean enabled, User user, Category category, PaymentMethod paymentMethod,
+			RecurringTransaction recurringTransaction) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.description = description;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
+		this.enabled = enabled;
 		this.user = user;
 		this.category = category;
 		this.paymentMethod = paymentMethod;
+		this.recurringTransaction = recurringTransaction;
 	}
 
 	public int getId() {
@@ -134,6 +146,22 @@ public class Expense {
 		this.paymentMethod = paymentMethod;
 	}
 
+	public RecurringTransaction getRecurringTransaction() {
+		return recurringTransaction;
+	}
+
+	public void setRecurringTransaction(RecurringTransaction recurringTransaction) {
+		this.recurringTransaction = recurringTransaction;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -156,8 +184,8 @@ public class Expense {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Expense [id=").append(id).append(", amount=").append(amount).append(", description=")
 				.append(description).append(", createTime=").append(createTime).append(", updateTime=")
-				.append(updateTime).append("]");
+				.append(updateTime).append(", enabled=").append(enabled).append("]");
 		return builder.toString();
 	}
 
-}
+} 

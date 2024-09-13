@@ -11,6 +11,7 @@
 		<class>com.skilldistillery.expense.entities.Expense</class>
 		<class>com.skilldistillery.expense.entities.PaymentMethod</class>
 		<class>com.skilldistillery.expense.entities.User</class>
+		<class>com.skilldistillery.expense.entities.RecurringTransaction</class>
 
 		<properties>
 			<property name="jakarta.persistence.jdbc.url"
