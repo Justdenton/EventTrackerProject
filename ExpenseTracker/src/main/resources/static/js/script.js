@@ -22,6 +22,7 @@ function loadAllExpenses(){
 				displayExpensesList(expenses);
 			}
 			else {
+				console.error("Failed to load expenses: " + xhr.status);
 			}
 		}
 	};
@@ -29,6 +30,40 @@ function loadAllExpenses(){
 }
 
 function displayExpensesList(expensesList){
-	let tbody = document.getElementsById('expensesListBody');
+	let tbody = document.getElementById('expensesListBody');
+	tbody.textContent = '';
+	
+	expensesList.forEach(function(expense){
+		
+		let tr = document.createElement('tr');
+		
+		let tdId = document.createElement('td');
+		tdId.textContent = expense.id;
+		tr.appendChild(tdId);
+		
+		let tdAmount = document.createElement('td');
+		tdId.textContent = expense.amount;
+		tr.appendChild(tdAmount);
+		
+		let tdDescription = document.createElement('td');
+		tdId.textContent = expense.description;
+		tr.appendChild(tdDescription);
+		
+		let tdEntered = document.createElement('td');
+		tdId.textContent = expense.createTime;
+		tr.appendChild(tdEntered);
+	});
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
 
