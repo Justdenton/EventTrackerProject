@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -41,9 +42,8 @@ public class RecurringTransaction {
 	@Column(name = "enabled")
 	private boolean enabled = true;
 
-	@JsonIgnoreProperties({ "recurringTransaction" })
-	@OneToOne
-	@JoinColumn(name = "expense_id")
+	@JsonIgnore
+	@OneToOne(mappedBy = "recurringTransaction")
 	private Expense expense;
 
 	public RecurringTransaction() {

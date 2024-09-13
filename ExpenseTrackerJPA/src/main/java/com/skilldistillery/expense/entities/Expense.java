@@ -38,7 +38,7 @@ public class Expense {
 	private LocalDateTime updateTime;
 
 	@Column(name = "enabled")
-	private Boolean enabled = true;
+	private Boolean enabled;
 
 	// ( each expense - related to 1: ==========
 	@JsonIgnoreProperties({ "expenses" })
@@ -57,7 +57,8 @@ public class Expense {
 	private PaymentMethod paymentMethod;
 
 	@JsonIgnoreProperties({ "expense" })
-	@OneToOne(mappedBy = "expense")
+	@OneToOne
+	@JoinColumn(name = "recurring_transaction_id")
 	private RecurringTransaction recurringTransaction;
 
 	// =========================================

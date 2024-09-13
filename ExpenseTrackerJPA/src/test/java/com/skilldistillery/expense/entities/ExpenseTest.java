@@ -83,7 +83,10 @@ class ExpenseTest {
 
 		RecurringTransaction recurringTransaction = expense.getRecurringTransaction();
 		assertEquals(1, recurringTransaction.getId());
-		assertEquals("Monthly", recurringTransaction.getRecurPeriod());
+		assertNotNull(recurringTransaction); 
+		assertEquals(1, recurringTransaction.getId()); 
+		assertEquals("Monthly", recurringTransaction.getRecurPeriod()); 
+		assertEquals(expense.getId(), recurringTransaction.getExpense().getId());
 	}
 	
 

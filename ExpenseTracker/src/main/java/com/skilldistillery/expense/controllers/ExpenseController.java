@@ -118,5 +118,25 @@ public class ExpenseController {
 			res.setStatus(400);
 		}
 	}
+	
+	// DISABLE
+	@PutMapping("expenses/{expenseId}/disable")
+	public Expense disableExpense(@PathVariable("expenseId") int expenseId, @RequestBody Expense expense, HttpServletResponse res) {
+		try {
+			Expense existingExpense = expenseService.getExpenseById(expenseId);
+			if (existingExpense == null) {
+				res.setStatus(404);
+				return null;
+			}
+			existingExpense.setEnabled(expense.getEnabled());
+			Expense updatedExpense = expenseService.update(expenseId, existingExpense);
+			res.setStatus(200);
+			return updatedExpense;
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
+	}
 
 }
