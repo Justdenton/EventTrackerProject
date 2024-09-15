@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.expense.entities.Expense;
 import com.skilldistillery.expense.services.ExpenseService;
+import com.skilldistillery.expense.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +25,9 @@ public class ExpenseController {
 
 	@Autowired
 	private ExpenseService expenseService;
+	
+	@Autowired
+	private UserService userService;
 
 	// http://localhost:8086/api/expenses
 	@GetMapping({ "expenses", "expenses/" })

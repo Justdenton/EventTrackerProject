@@ -42,12 +42,6 @@ public class ExpenseServiceImpl implements ExpenseService {
 		return null;
 	}
 
-//	@Override
-//	public List<Expense> getExpensesByCategoryName(String categoryName) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
 	@Override
 	public List<Expense> getExpensesByPaymentMethod(int paymentMethodId) {
 		if (paymentRepo.existsById(paymentMethodId)) {
@@ -89,5 +83,6 @@ public class ExpenseServiceImpl implements ExpenseService {
 		}
 		return false;
 	}
+
 
 }
