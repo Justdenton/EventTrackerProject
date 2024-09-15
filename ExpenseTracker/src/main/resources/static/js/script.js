@@ -13,6 +13,7 @@ function init() {
 	loadPaymentMethods();
 	loadUsers();
 	document.getElementById('addExpenseBtn').addEventListener('click', submitNewExpense);
+	document.getElementById('sumAmountBtn').addEventListener('click', calculateTotalAmount);
 }
 
 function loadAllExpenses() {
@@ -226,3 +227,22 @@ function deleteExpense(expenseId) {
 	}
 
 }
+
+function calculateTotalAmount() {
+    let tbody = document.getElementById('expensesListBody');
+    let rows = tbody.getElementsByTagName('tr');
+    let totalAmount = 0;
+
+    for (let i = 0; i < rows.length; i++) {
+        let amountCell = rows[i].getElementsByTagName('td')[1];
+        let amount = parseFloat(amountCell.textContent);
+
+        if (!isNaN(amount)) {
+            totalAmount += amount;
+        }
+    }
+
+    document.getElementById('totalAmount').textContent = 'Total Amount: $' + totalAmount.toFixed(2);
+}
+
+document.getElementById('sumAmountBtn').addEventListener('click', calculateTotalAmount);
