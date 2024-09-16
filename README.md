@@ -5,13 +5,13 @@
 | **Homework (Week 12) - Skill Distillery** |
 |-------------------------------------------|
 | The Expense Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. |
-| The front-end is subject to change next week, with the addition of Angular functionalitie(s). The front end dynamically interacts with the RESTful API using AJAX, allowing seamless CRUD operations on expenses without requiring page reloads. |
+| The front-end is subject to change/evolve next week, with the addition of Angular functionalities. The front end dynamically interacts with the RESTful API using AJAX, allowing seamless CRUD operations on expenses without requiring page reloads. |
 
 ### **MySQL Workbench - Schema**
 #### **First weekend**
 ![Database Schema](./images/event_tracker_schema_wide.png) 
 #### **Second weekend** 
-- (added the recurring_transaction table to be able to handle costs that haven't been incurred yet - in the future, along with income)
+- (added the recurring_transaction table to be able to handle costs that haven't been incurred yet, and potential future income.)
 ![Database Schema](./images/event_tracker_schema_recurring_addition.png)
 
 
@@ -47,8 +47,8 @@
 - AWS
 - git, GitHub
 - Postman
-- Javascript
-- AJAX
+- JavaScript
+  - AJAX
  
 ## **Lessons Learned** 
 - **Understanding MySQL Workbench**
@@ -56,7 +56,7 @@
 - **Understanding APIs:** 
   - Gained experience with how to structure APIs to serve as a bridge between backend systems and (future) frontend applications.
   - Tested, using Postman to verify all CRUD operations and potential errors.
-- **DOM Maniuplation**
+- **DOM Manipulation:** Learned how to manipulate the DOM using JavaScript to display data fetched from the backend API.
 
 ## **Resources**
 - https://github.com/SkillDistillery/SD44/blob/main/rest/EventTracker/README.md
