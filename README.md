@@ -10,7 +10,8 @@
 ### **MySQL Workbench - Schema**
 #### **First weekend**
 ![Database Schema](./images/event_tracker_schema_wide.png) 
-#### **Second weekend** (added the recurring_transaction table to be able to handle costs that haven't been incurred yet - in the future, along with income)
+#### **Second weekend** 
+- (added the recurring_transaction table to be able to handle costs that haven't been incurred yet - in the future, along with income)
 ![Database Schema](./images/event_tracker_schema_recurring_addition.png)
 
 
@@ -46,6 +47,8 @@
 - AWS
 - git, GitHub
 - Postman
+- Javascript
+- AJAX
  
 ## **Lessons Learned** 
 - **Understanding MySQL Workbench**
