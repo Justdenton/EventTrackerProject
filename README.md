@@ -7,10 +7,12 @@
 | The Expense Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. |
 | The front-end is subject to change next week, with the addition of Angular functionalitie(s). The front end dynamically interacts with the RESTful API using AJAX, allowing seamless CRUD operations on expenses without requiring page reloads. |
 
-### **Back-end API (1st weekend)**
-![Database Schema](./images/event_tracker_schema_wide.png)
-### **Front-end (2nd weekend)**
+### **MySQL Workbench - Schema**
+#### **First weekend**
+![Database Schema](./images/event_tracker_schema_wide.png) 
+#### **Second weekend** (added the recurring_transaction table to be able to handle costs that haven't been incurred yet - in the future, along with income)
 ![Database Schema](./images/event_tracker_schema_recurring_addition.png)
+
 
 
 ### **Rest Endpoints**
