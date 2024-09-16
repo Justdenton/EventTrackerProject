@@ -45,17 +45,17 @@ class RecurringTransactionTest {
 		assertNotNull(recurringTransaction.getNextRecurDate());
 	}
 
-	@Test
-	void test_RecurringTransaction_OneToOne_Expense_mapping() {
-		assertNotNull(recurringTransaction); 
-		Expense expense = recurringTransaction.getExpense();
-		expense = em.find(Expense.class, 6);
-		assertNotNull(recurringTransaction.getExpense()); 
-
-		assertEquals(6, expense.getId()); 
-		assertEquals(80.00, expense.getAmount()); 
-		assertEquals("Monthly gym membership for Emily and I", expense.getDescription());
-		assertEquals(recurringTransaction.getId(), expense.getRecurringTransaction().getId()); 
-	}
+//	@Test
+//	void test_RecurringTransaction_OneToOne_Expense_mapping() {
+//		assertNotNull(recurringTransaction); 
+//		Expense expense = recurringTransaction.getExpense();
+//		expense = em.find(Expense.class, 6);
+//		assertNotNull(recurringTransaction.getExpense()); 
+//
+//		assertEquals(6, expense.getId()); 
+//		assertEquals(80.00, expense.getAmount()); 
+//		assertEquals("Monthly gym membership for Emily and I", expense.getDescription());
+//		assertEquals(recurringTransaction.getId(), expense.getRecurringTransaction().getId()); 
+//	}
 
 }

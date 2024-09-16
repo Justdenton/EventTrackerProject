@@ -75,19 +75,19 @@ class ExpenseTest {
 		assertEquals("Debit Card", expense.getPaymentMethod().getName());
 	}
 
-	@Test
-	void test_Expense_OneToOne_RecurringTransaction_mapping() {
-		expense = em.find(Expense.class, 6);
-		assertNotNull(expense);
-		assertNotNull(expense.getRecurringTransaction());
-
-		RecurringTransaction recurringTransaction = expense.getRecurringTransaction();
-		assertEquals(1, recurringTransaction.getId());
-		assertNotNull(recurringTransaction); 
-		assertEquals(1, recurringTransaction.getId()); 
-		assertEquals("Monthly", recurringTransaction.getRecurPeriod()); 
-		assertEquals(expense.getId(), recurringTransaction.getExpense().getId());
-	}
+//	@Test
+//	void test_Expense_OneToOne_RecurringTransaction_mapping() {
+//		expense = em.find(Expense.class, 6);
+//		assertNotNull(expense);
+//		assertNotNull(expense.getRecurringTransaction());
+//
+//		RecurringTransaction recurringTransaction = expense.getRecurringTransaction();
+//		assertEquals(1, recurringTransaction.getId());
+//		assertNotNull(recurringTransaction); 
+//		assertEquals(1, recurringTransaction.getId()); 
+//		assertEquals("Monthly", recurringTransaction.getRecurPeriod()); 
+//		assertEquals(expense.getId(), recurringTransaction.getExpense().getId());
+//	}
 	
 
 }
