@@ -44,6 +44,7 @@ class PaymentMethodTest {
 		assertNotNull(pm);
 		assertEquals(1, pm.getId());
 		assertEquals("Cash", pm.getName());
+		// assertTrue(pm.getEnabled());
 	}
 
 }

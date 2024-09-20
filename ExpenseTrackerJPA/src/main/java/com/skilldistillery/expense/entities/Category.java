@@ -26,7 +26,7 @@ public class Category {
 	private String description;
 
 	@Column(name = "enabled")
-	private Boolean enabled = true;
+	private boolean enabled = true;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "category")
@@ -36,7 +36,7 @@ public class Category {
 		super();
 	}
 
-	public Category(int id, String name, String description, Boolean enabled, List<Expense> expenses) {
+	public Category(int id, String name, String description, boolean enabled, List<Expense> expenses) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -77,11 +77,11 @@ public class Category {
 		this.expenses = expenses;
 	}
 
-	public Boolean getEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(Boolean enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 

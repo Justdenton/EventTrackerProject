@@ -31,7 +31,7 @@ class ExpenseTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		// expense = em.find(Expense.class, 1);
+		expense = em.find(Expense.class, 6);
 	}
 
 	@AfterEach
@@ -41,7 +41,6 @@ class ExpenseTest {
 
 	@Test
 	void test_Expense_entity_mapping() {
-		expense = em.find(Expense.class, 6);
 		assertNotNull(expense);
 		assertEquals(80.00, expense.getAmount());
 		assertEquals("Monthly gym membership for Emily and I", expense.getDescription());
@@ -49,7 +48,6 @@ class ExpenseTest {
 
 	@Test
 	void test_Expense_ManyToOne_User_mapping() {
-		expense = em.find(Expense.class, 6);
 		assertNotNull(expense);
 		assertNotNull(expense.getUser());
 		assertEquals(2, expense.getUser().getId());
@@ -59,7 +57,6 @@ class ExpenseTest {
 
 	@Test
 	void test_Expense_ManyToOne_Category_mapping() {
-		expense = em.find(Expense.class, 6);
 		assertNotNull(expense);
 		assertNotNull(expense.getCategory());
 		assertEquals(6, expense.getCategory().getId());
@@ -68,26 +65,20 @@ class ExpenseTest {
 
 	@Test
 	void test_Expense_ManyToOne_PaymentMethod_mapping() {
-		expense = em.find(Expense.class, 6);
 		assertNotNull(expense);
 		assertNotNull(expense.getPaymentMethod());
 		assertEquals(4, expense.getPaymentMethod().getId());
 		assertEquals("Debit Card", expense.getPaymentMethod().getName());
 	}
 
-//	@Test
-//	void test_Expense_OneToOne_RecurringTransaction_mapping() {
-//		expense = em.find(Expense.class, 6);
-//		assertNotNull(expense);
-//		assertNotNull(expense.getRecurringTransaction());
-//
-//		RecurringTransaction recurringTransaction = expense.getRecurringTransaction();
-//		assertEquals(1, recurringTransaction.getId());
-//		assertNotNull(recurringTransaction); 
-//		assertEquals(1, recurringTransaction.getId()); 
-//		assertEquals("Monthly", recurringTransaction.getRecurPeriod()); 
-//		assertEquals(expense.getId(), recurringTransaction.getExpense().getId());
-//	}
-	
+	@Test
+	void test_Expense_OneToOne_RecurringTransaction_mapping() {
+		assertNotNull(expense);
+		assertNotNull(expense.getRecurringTransaction());
+		RecurringTransaction recurringTransaction = expense.getRecurringTransaction();
+		assertEquals(1, recurringTransaction.getId());
+		assertEquals("Monthly", recurringTransaction.getRecurPeriod());
+		assertEquals(expense.getId(), recurringTransaction.getExpense().getId());
+	}
 
 }

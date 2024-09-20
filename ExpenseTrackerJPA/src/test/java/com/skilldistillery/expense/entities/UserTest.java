@@ -2,7 +2,7 @@ package com.skilldistillery.expense.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -48,5 +48,6 @@ class UserTest {
 		assertEquals("Test", user.getFirstName());
 		assertEquals("Tester", user.getLastName());
 		assertEquals("test", user.getUsername());
+		// assertTrue(user.isActive());
 	}
 }

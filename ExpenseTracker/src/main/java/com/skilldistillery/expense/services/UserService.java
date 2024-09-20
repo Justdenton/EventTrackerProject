@@ -6,7 +6,7 @@ import com.skilldistillery.expense.entities.User;
 
 public interface UserService {
 
-	List<User> getAllUsers();
+	List<User> getAllUsers(); 
 	User getUserById(int userId);
 
 	User create(User user);
@@ -15,5 +15,7 @@ public interface UserService {
 
 	boolean deactivateUser(int userId);
 	boolean activateUser(int userId);
+	
+	User authenticateUser(String username, String password);
 
 }

@@ -49,6 +49,11 @@ public class ExpenseServiceImpl implements ExpenseService {
 		}
 		return null;
 	}
+	
+//    @Override
+//    public List<Expense> getExpensesByUserId(int userId) {
+//        return expenseRepo.findbyUserId(userId); 
+//    }
 
 	@Override
 	public Expense create(Expense expense) {
@@ -83,6 +88,14 @@ public class ExpenseServiceImpl implements ExpenseService {
 		}
 		return false;
 	}
+
+	@Override
+	public List<Expense> getExpensesByUserId(int userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 }

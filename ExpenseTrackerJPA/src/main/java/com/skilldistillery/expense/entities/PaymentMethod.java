@@ -1,10 +1,7 @@
 package com.skilldistillery.expense.entities;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,22 +24,18 @@ public class PaymentMethod {
 	@Column(name = "method_name")
 	private String name;
 
-//	@CreationTimestamp
-//	@Column(name = "create_time")
-//	private LocalDateTime createTime;
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "paymentMethod")
 	private List<Expense> expenses;
 
 	@Column(name = "enabled")
-	private Boolean enabled = true;
+	private boolean enabled = true;
 
 	public PaymentMethod() {
 		super();
 	}
 
-	public PaymentMethod(int id, String name, List<Expense> expenses, Boolean enabled) {
+	public PaymentMethod(int id, String name, List<Expense> expenses, boolean enabled) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -66,14 +59,6 @@ public class PaymentMethod {
 		this.name = name;
 	}
 
-//	public LocalDateTime getCreateTime() {
-//		return createTime;
-//	}
-//
-//	public void setCreateTime(LocalDateTime createTime) {
-//		this.createTime = createTime;
-//	}
-
 	public List<Expense> getExpenses() {
 		return expenses;
 	}
@@ -82,11 +67,11 @@ public class PaymentMethod {
 		this.expenses = expenses;
 	}
 
-	public Boolean getEnabled() {
+	public boolean getEnabled() {
 		return enabled;
-	} 
+	}
 
-	public void setEnabled(Boolean enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 

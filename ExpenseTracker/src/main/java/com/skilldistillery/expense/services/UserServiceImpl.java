@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService {
 		if (userOpt.isPresent()) {
 			return userOpt.get();
 		}
-		return null; 
+		return null;
 	}
 
 	@Override
 	public User create(User user) {
-		return userRepo.save(user); 
+		return userRepo.save(user);
 	}
 
 	@Override
@@ -43,17 +43,17 @@ public class UserServiceImpl implements UserService {
 			existingUser.setUsername(updateUser.getUsername());
 			existingUser.setPassword(updateUser.getPassword());
 			existingUser.setEmail(updateUser.getEmail());
-			existingUser.setActive(updateUser.isActive()); 
+			existingUser.setActive(updateUser.isActive());
 			return userRepo.save(existingUser);
 		}
-		return null; 
+		return null;
 	}
 
 	@Override
 	public boolean delete(int userId) {
 		if (userRepo.existsById(userId)) {
 			userRepo.deleteById(userId);
-			return true; 
+			return true;
 		}
 		return false;
 	}
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 		Optional<User> userOpt = userRepo.findById(userId);
 		if (userOpt.isPresent()) {
 			User user = userOpt.get();
-			user.setActive(false); 
+			user.setActive(false);
 			userRepo.save(user);
 			return true;
 		}
@@ -80,6 +80,15 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public User authenticateUser(String username, String password) {
+		User user = userRepo.findByUsername(username);
+		if (user != null && user.getPassword().equals(password)) {
+			return user;
+		}
+		return null;
 	}
 
 }

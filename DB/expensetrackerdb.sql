@@ -22,15 +22,17 @@ DROP TABLE IF EXISTS `user` ;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(45) NULL,
-  `last_name` VARCHAR(45) NULL,
-  `username` VARCHAR(16) NOT NULL,
-  `password` VARCHAR(32) NOT NULL,
+  `first_name` VARCHAR(50) NULL,
+  `last_name` VARCHAR(50) NULL,
+  `username` VARCHAR(30) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NULL,
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `active` TINYINT NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
 
 
 -- -----------------------------------------------------
@@ -42,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(300) NULL,
-  `enabled` TINYINT NULL DEFAULT 1,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -55,7 +57,7 @@ DROP TABLE IF EXISTS `payment_method` ;
 CREATE TABLE IF NOT EXISTS `payment_method` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `method_name` VARCHAR(45) NOT NULL,
-  `enabled` TINYINT NULL DEFAULT 1,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -71,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `recurring_transaction` (
   `end_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `recur_period` VARCHAR(45) NOT NULL,
   `next_recur_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `enabled` TINYINT NULL DEFAULT 1,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -87,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `expense` (
   `description` VARCHAR(300) NULL,
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `enabled` TINYINT NULL DEFAULT 1,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   `user_id` INT NOT NULL,
   `category_id` INT NOT NULL,
   `payment_method_id` INT NOT NULL,
@@ -155,13 +157,13 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `expensetrackerdb`;
-INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (1, 'Food', 'Expenses related to food.', NULL);
-INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (2, 'Grocery', 'Expenses related to grocery.', NULL);
-INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (3, 'Transportation', 'Expenses related to commuting or travel.', NULL);
-INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (4, 'Entertainment', 'Expenses related to entertainment.', NULL);
-INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (5, 'Utility', 'Expenses related to home utilities.', NULL);
-INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (6, 'Health', 'Expenses related to health and fitness.', NULL);
-INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (7, 'Insurance', 'Expenses related to insurance payments.', NULL);
+INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (1, 'Food', 'Expenses related to food.', 1);
+INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (2, 'Grocery', 'Expenses related to grocery.', 1);
+INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (3, 'Transportation', 'Expenses related to commuting or travel.', 1);
+INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (4, 'Entertainment', 'Expenses related to entertainment.', 1);
+INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (5, 'Utility', 'Expenses related to home utilities.', 1);
+INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (6, 'Health', 'Expenses related to health and fitness.', 1);
+INSERT INTO `category` (`id`, `name`, `description`, `enabled`) VALUES (7, 'Insurance', 'Expenses related to insurance payments.', 1);
 
 COMMIT;
 
@@ -171,12 +173,12 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `expensetrackerdb`;
-INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (1, 'Cash', NULL);
-INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (2, 'Check', NULL);
-INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (3, 'Credit Card', NULL);
-INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (4, 'Debit Card', NULL);
-INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (5, 'Gift Card', NULL);
-INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (6, 'Venmo', NULL);
+INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (1, 'Cash', 1);
+INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (2, 'Check', 1);
+INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (3, 'Credit Card', 1);
+INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (4, 'Debit Card', 1);
+INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (5, 'Gift Card', 1);
+INSERT INTO `payment_method` (`id`, `method_name`, `enabled`) VALUES (6, 'Venmo', 1);
 
 COMMIT;
 
@@ -202,8 +204,8 @@ INSERT INTO `expense` (`id`, `amount`, `description`, `create_time`, `update_tim
 INSERT INTO `expense` (`id`, `amount`, `description`, `create_time`, `update_time`, `enabled`, `user_id`, `category_id`, `payment_method_id`, `recurring_transaction_id`) VALUES (3, 30.30, 'Caseys - fill up Jeep', '2024-09-05 19:00:00', NULL, 1, 2, 3, 3, NULL);
 INSERT INTO `expense` (`id`, `amount`, `description`, `create_time`, `update_time`, `enabled`, `user_id`, `category_id`, `payment_method_id`, `recurring_transaction_id`) VALUES (4, 40.40, 'Lots of Taco Bell', '2024-09-05 19:00:00', NULL, 1, 2, 1, 1, NULL);
 INSERT INTO `expense` (`id`, `amount`, `description`, `create_time`, `update_time`, `enabled`, `user_id`, `category_id`, `payment_method_id`, `recurring_transaction_id`) VALUES (5, 50.50, 'Family museum trip', '2024-09-10 18:30:00', NULL, 1, 1, 4, 2, NULL);
-INSERT INTO `expense` (`id`, `amount`, `description`, `create_time`, `update_time`, `enabled`, `user_id`, `category_id`, `payment_method_id`, `recurring_transaction_id`) VALUES (6, 80.00, 'Monthly gym membership for Emily and I', '2024-09-10 17:00:00', NULL, 1, 2, 6, 4, NULL);
-INSERT INTO `expense` (`id`, `amount`, `description`, `create_time`, `update_time`, `enabled`, `user_id`, `category_id`, `payment_method_id`, `recurring_transaction_id`) VALUES (7, 120.25, 'Car Insurance (State Farm)', '2024-09-10 17:06:00', NULL, 1, 2, 7, 4, NULL);
+INSERT INTO `expense` (`id`, `amount`, `description`, `create_time`, `update_time`, `enabled`, `user_id`, `category_id`, `payment_method_id`, `recurring_transaction_id`) VALUES (6, 80.00, 'Monthly gym membership for Emily and I', '2024-09-10 17:00:00', NULL, 1, 2, 6, 4, 1);
+INSERT INTO `expense` (`id`, `amount`, `description`, `create_time`, `update_time`, `enabled`, `user_id`, `category_id`, `payment_method_id`, `recurring_transaction_id`) VALUES (7, 120.25, 'Car Insurance (State Farm)', '2024-09-10 17:06:00', NULL, 1, 2, 7, 4, 2);
 
 COMMIT;
 

@@ -2,12 +2,9 @@ package com.skilldistillery.expense.entities;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,7 +35,7 @@ public class Expense {
 	private LocalDateTime updateTime;
 
 	@Column(name = "enabled")
-	private Boolean enabled;
+	private boolean enabled;
 
 	// ( each expense - related to 1: ==========
 	@JsonIgnoreProperties({ "expenses" })
@@ -61,14 +58,12 @@ public class Expense {
 	@JoinColumn(name = "recurring_transaction_id")
 	private RecurringTransaction recurringTransaction;
 
-	// =========================================
-
 	public Expense() {
 		super();
 	}
 
 	public Expense(int id, double amount, String description, LocalDateTime createTime, LocalDateTime updateTime,
-			Boolean enabled, User user, Category category, PaymentMethod paymentMethod,
+			boolean enabled, User user, Category category, PaymentMethod paymentMethod,
 			RecurringTransaction recurringTransaction) {
 		super();
 		this.id = id;
@@ -155,11 +150,11 @@ public class Expense {
 		this.recurringTransaction = recurringTransaction;
 	}
 
-	public Boolean getEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(Boolean enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
@@ -189,4 +184,4 @@ public class Expense {
 		return builder.toString();
 	}
 
-} 
+}

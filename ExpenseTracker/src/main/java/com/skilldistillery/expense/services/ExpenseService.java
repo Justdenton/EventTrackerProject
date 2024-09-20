@@ -10,11 +10,12 @@ public interface ExpenseService {
 
 	Expense getExpenseById(int expenseId);
 	
-
 	List<Expense> getExpensesByCategory(int categoryId);
 	// List<Expense> getExpensesByCategoryName(String categoryName);
 
 	List<Expense> getExpensesByPaymentMethod(int paymentMethodId);
+	
+	List<Expense> getExpensesByUserId(int userId);
 
 	Expense create(Expense expense);
 	Expense update(int expenseId, Expense updateExpense);

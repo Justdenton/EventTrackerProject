@@ -3,6 +3,7 @@ package com.skilldistillery.expense.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.skilldistillery.expense.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@CrossOrigin({"*", "http://localhost/"})
 @RestController
 @RequestMapping("api")
 public class ExpenseController {
@@ -66,7 +68,7 @@ public class ExpenseController {
 		List<Expense> expenses = expenseService.getExpensesByPaymentMethod(paymentMethodId);
 		if (expenses == null || expenses.isEmpty()) {
 			res.setStatus(404);
-			return null;
+			return null; 
 		} else {
 			res.setStatus(200);
 			return expenses;
@@ -91,7 +93,8 @@ public class ExpenseController {
 	// UPDATE
 	// http://localhost:8086/api/expenses/6
 	@PutMapping("expenses/{expenseId}")
-	public Expense updateExpense(@PathVariable("expenseId") int expenseId, @RequestBody Expense expense,
+	public Expense updateExpense(@PathVariable("expenseId") int expenseId, 
+			@RequestBody Expense expense,
 			HttpServletResponse res) {
 		try {
 			Expense updatedExpense = expenseService.update(expenseId, expense);

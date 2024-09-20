@@ -3,11 +3,12 @@ package com.skilldistillery.expense.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import com.skilldistillery.expense.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@CrossOrigin({"*", "http://localhost/"})
 @RestController
 @RequestMapping("api/users")
 public class UserController {
@@ -105,6 +107,26 @@ public class UserController {
 		} else {
 			res.setStatus(404);
 		}
+	}
+
+	@PostMapping("/login")
+	public User loginUser(@RequestBody User user, HttpServletRequest req, HttpServletResponse res) {
+		User authenticatedUser = userService.authenticateUser(user.getUsername(), user.getPassword());
+
+		if (authenticatedUser != null) {
+			req.getSession().setAttribute("userId", authenticatedUser.getId());
+			res.setStatus(200);
+			return authenticatedUser;
+		} else {
+			res.setStatus(401);
+			return null;
+		}
+	}
+
+	@PostMapping("/logout")
+	public void logoutUser(HttpServletRequest req, HttpServletResponse res) {
+		req.getSession().invalidate();
+		res.setStatus(200);
 	}
 
 }

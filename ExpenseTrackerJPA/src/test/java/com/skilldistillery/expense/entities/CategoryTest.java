@@ -44,6 +44,7 @@ class CategoryTest {
 		assertNotNull(category);
 		assertEquals("Food", category.getName());
 		assertEquals("Expenses related to food.", category.getDescription());
+		// assertTrue(category.getEnabled());
 	}
 
 }
