@@ -49,11 +49,11 @@ public class ExpenseServiceImpl implements ExpenseService {
 		}
 		return null;
 	}
-	
-//    @Override
-//    public List<Expense> getExpensesByUserId(int userId) {
-//        return expenseRepo.findbyUserId(userId); 
-//    }
+
+	@Override
+	public List<Expense> getExpensesByUserId(int userId) {
+		return expenseRepo.findByUser_Id(userId);
+	}
 
 	@Override
 	public Expense create(Expense expense) {
@@ -63,7 +63,10 @@ public class ExpenseServiceImpl implements ExpenseService {
 		if (expense.getPaymentMethod() != null && !paymentRepo.existsById(expense.getPaymentMethod().getId())) {
 			return null;
 		}
-		return expenseRepo.save(expense);
+		if (expense.getUser() != null) {
+			return expenseRepo.save(expense);
+		}
+		return null;
 	}
 
 	@Override
@@ -72,12 +75,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 		if (existingExpenseOpt.isPresent()) {
 			Expense existingExpense = existingExpenseOpt.get();
 
-			// Create Time bug in JSON (null issue in console) 
+			// Create Time bug in JSON (null issue in console)
 			updateExpense.setCreateTime(existingExpense.getCreateTime());
 			updateExpense.setId(expenseId);
 			return expenseRepo.save(updateExpense);
 		}
-		return null; 
+		return null;
 	}
 
 	@Override
@@ -88,14 +91,5 @@ public class ExpenseServiceImpl implements ExpenseService {
 		}
 		return false;
 	}
-
-	@Override
-	public List<Expense> getExpensesByUserId(int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
 
 }

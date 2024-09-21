@@ -1,3 +1,8 @@
+import { Category } from "./category";
+import { PaymentMethod } from "./payment-method";
+import { RecurringTransaction } from "./recurring-transaction";
+import { User } from "./user";
+
 export class Expense {
   id: number;
   amount: number;
@@ -6,10 +11,10 @@ export class Expense {
   createTime: string | undefined;
   updateTime: string | undefined;
 
-  // user:
-  // category:
-  // paymentMethod:
-  // recurringTransaction:
+  user: User;
+  category: Category;
+  paymentMethod: PaymentMethod;
+  recurringTransaction: RecurringTransaction | null;
 
   constructor(
     id: number = 0,
@@ -17,7 +22,12 @@ export class Expense {
     description: string = '',
     enabled: boolean = true,
     createTime: string = '',
-    updateTime: string = ''
+    updateTime: string = '',
+
+    user: User = new User(),
+    category: Category = new Category(),
+    paymentMethod: PaymentMethod = new PaymentMethod(),
+    recurringTransaction: RecurringTransaction | null = null
   ) {
     this.id = id;
     this.amount = amount;
@@ -25,5 +35,10 @@ export class Expense {
     this.enabled = enabled;
     this.createTime = createTime;
     this.updateTime = updateTime;
+
+    this.user = user;
+    this.category = category;
+    this.paymentMethod = paymentMethod;
+    this.recurringTransaction = recurringTransaction;
   }
 }

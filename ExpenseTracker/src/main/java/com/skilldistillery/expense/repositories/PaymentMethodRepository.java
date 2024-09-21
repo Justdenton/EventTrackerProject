@@ -6,4 +6,4 @@ import com.skilldistillery.expense.entities.PaymentMethod;
 
 public interface PaymentMethodRepository extends JpaRepository<PaymentMethod, Integer>{
 
-}
+}   

@@ -12,6 +12,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
 	List<Expense> findByPaymentMethodId(int paymentMethodId);
 	
-	// List<Expense> findbyUserId(int userId); 
-
+	List<Expense> findByUser_Id(int userId);  
+ 
 }

@@ -1,42 +1,131 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpenseService } from '../../services/expense.service';
+import { CategoryService } from '../../services/category.service';
+import { PaymentMethodService } from '../../services/payment-method.service';
+import { RecurringTransactionService } from '../../services/recurring-transaction.service';
 import { Expense } from '../../models/expense';
-import { CommonModule } from '@angular/common';
+import { Category } from '../../models/category';
+import { PaymentMethod } from '../../models/payment-method';
+import { RecurringTransaction } from '../../models/recurring-transaction';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
 
   expenses: Expense[] = [];
+  categories: Category[] = [];
+  paymentMethods: PaymentMethod[] = [];
+  recurringTransactions: RecurringTransaction[] = [];
+  newExpense: Expense;
+  selectedNewRecurringTransactionId: number | null = null;
+  selectedRecurringTransactionId: { [key: number]: number | null } = {};
 
   constructor(
-    private expenseService: ExpenseService
-  ){}
+    private expenseService: ExpenseService,
+    private categoryService: CategoryService,
+    private paymentMethodService: PaymentMethodService,
+    // private recurringTransactionService: RecurringTransactionService
+    // private userService: UserService
+  ) {
+    this.newExpense = new Expense();
+    this.newExpense.paymentMethod = new PaymentMethod();
+  }
 
   ngOnInit(): void {
     this.reloadExpenses();
+    this.loadCategories();
+    this.loadPaymentMethods();
   }
 
   reloadExpenses(): void {
     this.expenseService.index().subscribe({
       next: (expenseList) => {
-        this.expenses = expenseList;
+        this.expenses = expenseList.map(expense => {
+          if (!expense.paymentMethod) {
+            expense.paymentMethod = new PaymentMethod();
+          }
+          return expense;
+        });
       },
       error: (fail) => {
-        console.error('error retrieving expense list');
-        console.error(fail);
+        console.error('Error retrieving expense list', fail);
       }
     });
   }
 
+  loadCategories(): void {
+    this.categoryService.index().subscribe({
+      next: (categoryList) => {
+        this.categories = categoryList;
+      },
+      error: (fail) => {
+        console.error('Error retrieving category list', fail);
+      }
+    });
+  }
 
+  loadPaymentMethods(): void {
+    this.paymentMethodService.index().subscribe({
+      next: (paymentMethodList) => {
+        this.paymentMethods = paymentMethodList;
+      },
+      error: (fail) => {
+        console.error('Error retrieving payment methods', fail);
+      }
+    });
+  }
+
+  addExpense(expense: Expense): void {
+
+    expense.user = {
+      id: 2,
+      username: 'jdent',
+      email: 'jd@ex.com',
+      active: true
+    };
+
+    this.expenseService.create(expense).subscribe({
+      next: () => {
+        this.reloadExpenses();
+        this.newExpense = new Expense();
+        this.newExpense.paymentMethod = new PaymentMethod();
+      },
+      error: (err) => {
+        console.error('Error adding expense', err);
+      }
+    });
+  }
+
+  updateExpense(expense: Expense): void {
+    this.expenseService.update(expense).subscribe({
+      next: () => {
+        this.reloadExpenses();
+      },
+      error: (err) => {
+        console.error('Error updating expense', err);
+      }
+    });
+  }
+
+  deleteExpense(expenseId: number): void {
+    this.expenseService.destroy(expenseId).subscribe({
+      next: () => {
+        this.reloadExpenses();
+      },
+      error: (err) => {
+        console.error('Error deleting expense', err);
+      }
+    });
+  }
 }

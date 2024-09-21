@@ -21,18 +21,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @CrossOrigin({"*", "http://localhost/"})
 @RestController
-@RequestMapping("api/paymentmethods")
+@RequestMapping("api")
 public class PaymentMethodController {
 
 	@Autowired
 	private PaymentMethodService paymentMethodService; 
 
-	@GetMapping
+	@GetMapping("payment-methods")
 	public List<PaymentMethod> getAllPaymentMethods() {
 		return paymentMethodService.getAllPaymentMethods();
 	}
 
-	@GetMapping("{paymentMethodId}")
+	@GetMapping("payment-methods/{paymentMethodId}")
 	public PaymentMethod getPaymentMethodById(@PathVariable("paymentMethodId") int paymentMethodId,
 			HttpServletResponse res) {
 		PaymentMethod paymentMethod = paymentMethodService.getPaymentMethodById(paymentMethodId);
@@ -44,54 +44,54 @@ public class PaymentMethodController {
 		return paymentMethod;
 	}
 
-	// CREATE
-	@PostMapping
-	public PaymentMethod createPaymentMethod(@RequestBody PaymentMethod paymentMethod, HttpServletResponse res,
-			HttpServletRequest req) {
-		PaymentMethod createdPaymentMethod = paymentMethodService.create(paymentMethod);
-		if (createdPaymentMethod == null) {
-			res.setStatus(400);
-		} else {
-			res.setStatus(201);
-			StringBuffer url = req.getRequestURL();
-			res.setHeader("Location", url.append("/").append(createdPaymentMethod.getId()).toString());
-		}
-		return createdPaymentMethod;
-	}
-
-	// UPDATE
-	// *** NULL PROBLEM ** 
-	// When updating, createdate is set to null - does it make sense to have a DT in here..?
-	@PutMapping("{paymentMethodId}")
-	public PaymentMethod updatePaymentMethod(@PathVariable("paymentMethodId") int paymentMethodId,
-			@RequestBody PaymentMethod paymentMethod, HttpServletResponse res) {
-		try {
-			PaymentMethod updatedPaymentMethod = paymentMethodService.update(paymentMethodId, paymentMethod);
-			if (updatedPaymentMethod == null) {
-				res.setStatus(404);
-			} else {
-				res.setStatus(200);
-			}
-			return updatedPaymentMethod;
-		} catch (Exception e) {
-			res.setStatus(400);
-			return null;
-		}
-	}
-
-	// DELETE
-	@DeleteMapping("{paymentMethodId}")
-	public void deletePaymentMethod(@PathVariable("paymentMethodId") int paymentMethodId, HttpServletResponse res) {
-		try {
-			boolean deleted = paymentMethodService.delete(paymentMethodId);
-			if (deleted) {
-				res.setStatus(204);
-			} else {
-				res.setStatus(404);
-			}
-		} catch (Exception e) {
-			res.setStatus(400);
-		}
-	}
+//	// CREATE
+//	@PostMapping
+//	public PaymentMethod createPaymentMethod(@RequestBody PaymentMethod paymentMethod, HttpServletResponse res,
+//			HttpServletRequest req) {
+//		PaymentMethod createdPaymentMethod = paymentMethodService.create(paymentMethod);
+//		if (createdPaymentMethod == null) {
+//			res.setStatus(400);
+//		} else {
+//			res.setStatus(201);
+//			StringBuffer url = req.getRequestURL();
+//			res.setHeader("Location", url.append("/").append(createdPaymentMethod.getId()).toString());
+//		}
+//		return createdPaymentMethod;
+//	}
+//
+//	// UPDATE
+//	// *** NULL PROBLEM ** 
+//	// When updating, createdate is set to null - does it make sense to have a DT in here..?
+//	@PutMapping("{paymentMethodId}")
+//	public PaymentMethod updatePaymentMethod(@PathVariable("paymentMethodId") int paymentMethodId,
+//			@RequestBody PaymentMethod paymentMethod, HttpServletResponse res) {
+//		try {
+//			PaymentMethod updatedPaymentMethod = paymentMethodService.update(paymentMethodId, paymentMethod);
+//			if (updatedPaymentMethod == null) {
+//				res.setStatus(404);
+//			} else {
+//				res.setStatus(200);
+//			}
+//			return updatedPaymentMethod;
+//		} catch (Exception e) {
+//			res.setStatus(400);
+//			return null;
+//		}
+//	}
+//
+//	// DELETE
+//	@DeleteMapping("{paymentMethodId}")
+//	public void deletePaymentMethod(@PathVariable("paymentMethodId") int paymentMethodId, HttpServletResponse res) {
+//		try {
+//			boolean deleted = paymentMethodService.delete(paymentMethodId);
+//			if (deleted) {
+//				res.setStatus(204);
+//			} else {
+//				res.setStatus(404);
+//			}
+//		} catch (Exception e) {
+//			res.setStatus(400);
+//		}
+//	}
 
 }

@@ -1,5 +1,93 @@
-<h1>Welcome to Expense Tracker</h1>
+<h1>Expense Tracker</h1>
 
-<ul>
-  <li *ngFor="let expense of expenses">{{expense.description}}</li>
-</ul>
+<!-- ADD - New Expense (format to match table below) -->
+<table class="table table-striped table-hover mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th>Category</th>
+      <th>Payment Method</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Enabled</th>
+      <th>Add Expense</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <select [(ngModel)]="newExpense.category.id" class="form-control">
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="newExpense.paymentMethod.id" class="form-control">
+          <option *ngFor="let method of paymentMethods" [value]="method.id">
+            {{ method.name }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <input type="text" [(ngModel)]="newExpense.description" class="form-control" placeholder="Enter description" />
+      </td>
+      <td style="width: 100px;">
+        <input type="number" [(ngModel)]="newExpense.amount" class="form-control" placeholder="Enter amount" />
+      </td>
+      <td style="width: 80px; text-align: center;">
+        <input type="checkbox" [(ngModel)]="newExpense.enabled" />
+      </td>
+      <td>
+        <button class="btn btn-success" (click)="addExpense(newExpense)">Add Expense</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- LIST - ALL Expenses (currently) - TODO filter enabled, add checkbox at top to display "hidden" -->
+<table class="table table-striped table-hover mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th>Category</th>
+      <th>Payment Method</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Enabled</th>
+      <th>Save</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let expense of expenses">
+      <td>
+        <select [(ngModel)]="expense.category.id" class="form-control">
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="expense.paymentMethod.id" class="form-control">
+          <option *ngFor="let method of paymentMethods" [value]="method.id">
+            {{ method.name }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <input type="text" [(ngModel)]="expense.description" class="form-control" />
+      </td>
+      <td style="width: 100px;">
+        <input type="number" [(ngModel)]="expense.amount" class="form-control" />
+      </td>
+      <td style="width: 80px; text-align: center;">
+        <input type="checkbox" [(ngModel)]="expense.enabled" />
+      </td>
+      <td>
+        <button class="btn btn-success" (click)="updateExpense(expense)">Save</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteExpense(expense.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

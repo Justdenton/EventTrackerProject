@@ -20,14 +20,14 @@ import com.skilldistillery.expense.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@CrossOrigin({"*", "http://localhost/"})
+@CrossOrigin({ "*", "http://localhost/" })
 @RestController
 @RequestMapping("api")
 public class ExpenseController {
 
 	@Autowired
 	private ExpenseService expenseService;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -37,7 +37,17 @@ public class ExpenseController {
 		return expenseService.getAllExpenses();
 	}
 
-	// http://localhost:8086/api/expenses/1
+	@GetMapping("users/{userId}/expenses")
+	public List<Expense> getExpensesByUserId(@PathVariable("userId") int userId, HttpServletResponse res) {
+		List<Expense> expenses = expenseService.getExpensesByUserId(userId);
+		if (expenses == null || expenses.isEmpty()) {
+			res.setStatus(404);
+		} else {
+			res.setStatus(200);
+		}
+		return expenses; 
+	}
+
 	@GetMapping("expenses/{expenseId}")
 	public Expense expenseSearch(@PathVariable("expenseId") int expenseId, HttpServletResponse res) {
 		Expense expense = expenseService.getExpenseById(expenseId);
@@ -49,7 +59,6 @@ public class ExpenseController {
 		return expense;
 	}
 
-	// http://localhost:8086/api/expenses/categories/1
 	@GetMapping("expenses/categories/{categoryId}")
 	public List<Expense> categorySearch(@PathVariable("categoryId") int categoryId, HttpServletResponse res) {
 		List<Expense> expenses = expenseService.getExpensesByCategory(categoryId);
@@ -62,13 +71,12 @@ public class ExpenseController {
 		}
 	}
 
-	// http://localhost:8086/api/expenses/payments/1
 	@GetMapping("expenses/payments/{paymentMethodId}")
 	public List<Expense> paymentSearch(@PathVariable("paymentMethodId") int paymentMethodId, HttpServletResponse res) {
 		List<Expense> expenses = expenseService.getExpensesByPaymentMethod(paymentMethodId);
 		if (expenses == null || expenses.isEmpty()) {
 			res.setStatus(404);
-			return null; 
+			return null;
 		} else {
 			res.setStatus(200);
 			return expenses;
@@ -76,9 +84,14 @@ public class ExpenseController {
 	}
 
 	// CREATE
-	// http://localhost:8086/api/expenses
 	@PostMapping("expenses")
 	public Expense createExpense(@RequestBody Expense expense, HttpServletResponse res, HttpServletRequest req) {
+
+		if (expense.getUser() == null || userService.getUserById(expense.getUser().getId()) == null) {
+			res.setStatus(400);
+			return null;
+		}
+
 		Expense createdExpense = expenseService.create(expense);
 		if (createdExpense == null) {
 			res.setStatus(400);
@@ -91,10 +104,8 @@ public class ExpenseController {
 	}
 
 	// UPDATE
-	// http://localhost:8086/api/expenses/6
 	@PutMapping("expenses/{expenseId}")
-	public Expense updateExpense(@PathVariable("expenseId") int expenseId, 
-			@RequestBody Expense expense,
+	public Expense updateExpense(@PathVariable("expenseId") int expenseId, @RequestBody Expense expense,
 			HttpServletResponse res) {
 		try {
 			Expense updatedExpense = expenseService.update(expenseId, expense);
@@ -125,10 +136,11 @@ public class ExpenseController {
 			res.setStatus(400);
 		}
 	}
-	
+
 	// DISABLE
 	@PutMapping("expenses/{expenseId}/disable")
-	public Expense disableExpense(@PathVariable("expenseId") int expenseId, @RequestBody Expense expense, HttpServletResponse res) {
+	public Expense disableExpense(@PathVariable("expenseId") int expenseId, @RequestBody Expense expense,
+			HttpServletResponse res) {
 		try {
 			Expense existingExpense = expenseService.getExpenseById(expenseId);
 			if (existingExpense == null) {
