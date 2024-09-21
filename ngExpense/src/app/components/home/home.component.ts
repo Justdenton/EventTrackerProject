@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { HiddenExpensesPipe } from '../../pipes/hidden-expenses.pipe';
-
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-home',
@@ -31,22 +31,25 @@ export class HomeComponent implements OnInit {
   paymentMethods: PaymentMethod[] = [];
   newExpense: Expense;
   includeHiddenExpenses: boolean = false;
+  users: User[] = [];
 
   constructor(
     private expenseService: ExpenseService,
     private categoryService: CategoryService,
     private paymentMethodService: PaymentMethodService,
     // private recurringTransactionService: RecurringTransactionService
-    // private userService: UserService
+    private userService: UserService
   ) {
     this.newExpense = new Expense();
     this.newExpense.paymentMethod = new PaymentMethod();
+    this.newExpense.user = new User();
   }
 
   ngOnInit(): void {
     this.reloadExpenses();
     this.loadCategories();
     this.loadPaymentMethods();
+    this.loadUsers();
   }
 
   reloadExpenses(): void {
@@ -87,20 +90,24 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  loadUsers(): void {
+    this.userService.index().subscribe({
+      next: (userList) => {
+        this.users = userList;
+      },
+      error: (fail) => {
+        console.error('Error retrieving payment methods', fail);
+      }
+    });
+  }
+
   addExpense(expense: Expense): void {
-
-    expense.user = {
-      id: 2,
-      username: 'jdent',
-      email: 'jd@ex.com',
-      active: true
-    };
-
     this.expenseService.create(expense).subscribe({
       next: () => {
         this.reloadExpenses();
         this.newExpense = new Expense();
         this.newExpense.paymentMethod = new PaymentMethod();
+        this.newExpense.user = new User();
       },
       error: (err) => {
         console.error('Error adding expense', err);
@@ -128,5 +135,9 @@ export class HomeComponent implements OnInit {
         console.error('Error deleting expense', err);
       }
     });
+  }
+
+  toggleHiddenExpenses(): void {
+    this.includeHiddenExpenses = !this.includeHiddenExpenses;
   }
 }

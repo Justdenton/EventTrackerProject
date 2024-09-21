@@ -1,0 +1,29 @@
+th {
+  text-align: center;
+}
+
+.category-column {
+  width: 8%;
+}
+
+.payment-method-column {
+  width: 5%;
+}
+
+.description-column {
+  width: 30%;
+}
+
+.amount-column {
+  width: 5%;
+}
+
+.show-column {
+  width: 2%;
+  text-align: center;
+}
+
+.action-column {
+  width: 5%;
+  text-align: center;
+}

@@ -15,13 +15,13 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "payment_method")
-public class PaymentMethod {
+public class PaymentMethod { 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "method_name")
+	@Column(name = "method_name") 
 	private String name;
 
 	@JsonIgnore
