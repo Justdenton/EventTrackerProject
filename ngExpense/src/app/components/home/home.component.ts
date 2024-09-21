@@ -10,14 +10,17 @@ import { RecurringTransaction } from '../../models/recurring-transaction';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
+import { HiddenExpensesPipe } from '../../pipes/hidden-expenses.pipe';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule
-  ],
+    CommonModule,
+    HiddenExpensesPipe
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
@@ -26,10 +29,8 @@ export class HomeComponent implements OnInit {
   expenses: Expense[] = [];
   categories: Category[] = [];
   paymentMethods: PaymentMethod[] = [];
-  recurringTransactions: RecurringTransaction[] = [];
   newExpense: Expense;
-  selectedNewRecurringTransactionId: number | null = null;
-  selectedRecurringTransactionId: { [key: number]: number | null } = {};
+  includeHiddenExpenses: boolean = false;
 
   constructor(
     private expenseService: ExpenseService,
