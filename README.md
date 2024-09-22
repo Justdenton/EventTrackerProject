@@ -1,20 +1,21 @@
-# **EventTrackerProject**
+# **Expense Tracker**
 
 ## **Overview**
 
-| **Homework (Week 12) - Skill Distillery** |
+| **Homework - Skill Distillery** |
+|:-------------------------------:|
+|        Week 12 - Backend        |   
+| Week 13 - Frontend (JavaScript/AJAX)  |
+|    Week 14 - Frontend (Angular)        |    
 |-------------------------------------------|
-| The Expense Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, and **Spring Boot**, the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. |
-| The front-end is subject to change/evolve next week, with the addition of Angular functionalities. The front end dynamically interacts with the RESTful API using AJAX, allowing seamless CRUD operations on expenses without requiring page reloads. |
+| The Expense Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, **Spring Boot**, and **Angular** the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. The current version replaces the JavaScript/AJAX front end with an Angular front-ned for improved functionality and user experience. |
 
 ### **MySQL Workbench - Schema**
-#### **First weekend**
-![Database Schema](./images/event_tracker_schema_wide.png) 
-#### **Second weekend** 
-- (added the recurring_transaction table to be able to handle costs that haven't been incurred yet, and potential future income.)
+<!-- #### **First weekend**
+![Database Schema](./images/event_tracker_schema_wide.png)  -->
+<!-- #### **Current Schema:**  -->
+<!-- - (added the recurring_transaction table to be able to handle costs that haven't been incurred yet, and potential future income.) -->
 ![Database Schema](./images/event_tracker_schema_recurring_addition.png)
-
-
 
 ### **Rest Endpoints**
 - **Test with Postman:**
@@ -40,16 +41,20 @@
   - Used JUnit to verify entity mappings.
 
 ## **Technologies Used**
-- Java
-- Spring Boot
-- JPA: Java Persistence API
-- MySQL, MySQL Workbench
-- AWS
-- git, GitHub
-- Postman
-- JavaScript
-  - AJAX
- 
+- **Backend:**
+  - Java
+  - Spring Data JPA
+  - Spring Boot
+  - MySQL, MySQL Workbench
+  - AWS
+  - git, GitHub
+  - Postman
+- **Frontend:**
+  - Angular
+    - (replaced JavaScript/AJAX from previous version)
+  - Typescript
+  - HTML/CSS
+
 ## **Lessons Learned** 
 - **Understanding MySQL Workbench**
   - Gained experience with designing and visualizing database schemas.
@@ -57,9 +62,13 @@
   - Gained experience with how to structure APIs to serve as a bridge between backend systems and (future) frontend applications.
   - Tested, using Postman to verify all CRUD operations and potential errors.
 - **DOM Manipulation:** Learned how to manipulate the DOM using JavaScript to display data fetched from the backend API.
+- **Understanding Angular:**
+  - Gained experience with buidling a frontend using Angulat, including components, services, and data binding.
 
 ## **Resources**
 - https://github.com/SkillDistillery/SD44/blob/main/rest/EventTracker/README.md
 - https://www.restapitutorial.com/introduction/resourcenaming
 - https://www.restapitutorial.com/httpstatuscodes
+- https://angular.dev/guide/templates/pipes
+- https://angular.dev/guide/components
 

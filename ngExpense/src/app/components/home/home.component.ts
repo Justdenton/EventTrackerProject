@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   includeHiddenExpenses: boolean = false;
   users: User[] = [];
   selectedUserId: number | null = null;
+  // totalSum: number = 0;
 
   constructor(
     private expenseService: ExpenseService,
@@ -53,6 +54,7 @@ export class HomeComponent implements OnInit {
     this.loadCategories();
     this.loadPaymentMethods();
     this.loadUsers();
+    // this.calculateSum();
   }
 
   onUserSelected(userId: number): void {
@@ -113,21 +115,24 @@ export class HomeComponent implements OnInit {
   addExpense(expense: Expense): void {
     if (this.selectedUserId) {
       expense.user.id = this.selectedUserId;
+      this.expenseService.create(expense).subscribe({
+        next: () => {
+          this.reloadExpenses();
+          this.newExpense = new Expense();
+          this.newExpense.paymentMethod = new PaymentMethod();
+          this.newExpense.user = { ...expense.user };
+        },
+        error: (err) => {
+          console.error('Error adding expense', err);
+        }
+      });
+    } else {
+      alert('Please select a username before adding an expense.');
     }
-    this.expenseService.create(expense).subscribe({
-      next: () => {
-        this.reloadExpenses();
-        this.newExpense = new Expense();
-        this.newExpense.paymentMethod = new PaymentMethod();
-        this.newExpense.user = { ...expense.user };
-      },
-      error: (err) => {
-        console.error('Error adding expense', err);
-      }
-    });
   }
 
   updateExpense(expense: Expense): void {
+
     this.expenseService.update(expense).subscribe({
       next: () => {
         this.reloadExpenses();
@@ -152,4 +157,16 @@ export class HomeComponent implements OnInit {
   toggleHiddenExpenses(): void {
     this.includeHiddenExpenses = !this.includeHiddenExpenses;
   }
+
+  // calculateSum(): void {
+  //   const filteredExpenses = this.expenses.filter(expense => this.includeHiddenExpenses || expense.enabled);
+  //   this.totalSum = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+  //   // this.reloadExpenses();
+  // }
+  get totalSum(): number {
+    return this.expenses
+      .filter(expense => this.includeHiddenExpenses || expense.enabled)
+      .reduce((sum, expense) => sum + (expense.amount || 0), 0);
+  }
+
 }

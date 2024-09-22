@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "payment_method")
-public class PaymentMethod { 
+public class PaymentMethod {  
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
