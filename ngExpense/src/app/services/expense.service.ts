@@ -29,7 +29,7 @@ export class ExpenseService {
   }
 
   getExpensesByUserId(userId: number): Observable<Expense[]> {
-    return this.http.get<Expense[]>(`${this.url}/users/${userId}/expenses`).pipe(
+    return this.http.get<Expense[]>(`${this.url}/users/${userId}`).pipe(
       catchError(
         (err: any) => {
           console.log(err);
@@ -40,6 +40,7 @@ export class ExpenseService {
       )
     );
   }
+
 
   create(expense: Expense): Observable<Expense> {
     return this.http.post<Expense>(this.url, expense).pipe(

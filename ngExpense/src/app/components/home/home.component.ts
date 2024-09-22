@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { HiddenExpensesPipe } from '../../pipes/hidden-expenses.pipe';
 import { User } from '../../models/user';
+import { SelectedUsernamePipe } from '../../pipes/selected-username.pipe';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ import { User } from '../../models/user';
   imports: [
     FormsModule,
     CommonModule,
-    HiddenExpensesPipe
+    HiddenExpensesPipe,
+    SelectedUsernamePipe
 ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
   newExpense: Expense;
   includeHiddenExpenses: boolean = false;
   users: User[] = [];
+  selectedUserId: number | null = null;
 
   constructor(
     private expenseService: ExpenseService,
@@ -52,18 +55,24 @@ export class HomeComponent implements OnInit {
     this.loadUsers();
   }
 
+  onUserSelected(userId: number): void {
+    console.log('Selected user ID: ', userId);
+    this.selectedUserId = userId;
+    this.reloadExpenses();
+  }
+
   reloadExpenses(): void {
-    this.expenseService.index().subscribe({
+    if (!this.selectedUserId) {
+      this.expenses = [];
+      return;
+    }
+    this.expenseService.getExpensesByUserId(this.selectedUserId).subscribe({
       next: (expenseList) => {
-        this.expenses = expenseList.map(expense => {
-          if (!expense.paymentMethod) {
-            expense.paymentMethod = new PaymentMethod();
-          }
-          return expense;
-        });
+        this.expenses = expenseList.length ? expenseList : [];
       },
       error: (fail) => {
-        console.error('Error retrieving expense list', fail);
+        console.error('Error retrieving expense list for user', fail);
+        this.expenses = [];
       }
     });
   }
@@ -102,12 +111,15 @@ export class HomeComponent implements OnInit {
   }
 
   addExpense(expense: Expense): void {
+    if (this.selectedUserId) {
+      expense.user.id = this.selectedUserId;
+    }
     this.expenseService.create(expense).subscribe({
       next: () => {
         this.reloadExpenses();
         this.newExpense = new Expense();
         this.newExpense.paymentMethod = new PaymentMethod();
-        this.newExpense.user = new User();
+        this.newExpense.user = { ...expense.user };
       },
       error: (err) => {
         console.error('Error adding expense', err);

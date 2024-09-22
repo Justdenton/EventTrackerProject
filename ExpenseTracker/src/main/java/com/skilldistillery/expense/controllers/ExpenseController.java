@@ -36,8 +36,8 @@ public class ExpenseController {
 	public List<Expense> getExpenseList() {
 		return expenseService.getAllExpenses();
 	}
-
-	@GetMapping("users/{userId}/expenses")
+ 
+	@GetMapping("expenses/users/{userId}") 
 	public List<Expense> getExpensesByUserId(@PathVariable("userId") int userId, HttpServletResponse res) {
 		List<Expense> expenses = expenseService.getExpensesByUserId(userId);
 		if (expenses == null || expenses.isEmpty()) {
