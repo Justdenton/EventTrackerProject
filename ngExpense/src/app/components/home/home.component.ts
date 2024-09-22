@@ -8,7 +8,7 @@ import { Category } from '../../models/category';
 import { PaymentMethod } from '../../models/payment-method';
 import { RecurringTransaction } from '../../models/recurring-transaction';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { HiddenExpensesPipe } from '../../pipes/hidden-expenses.pipe';
 import { User } from '../../models/user';
@@ -21,7 +21,8 @@ import { SelectedUsernamePipe } from '../../pipes/selected-username.pipe';
     FormsModule,
     CommonModule,
     HiddenExpensesPipe,
-    SelectedUsernamePipe
+    SelectedUsernamePipe,
+    NgOptimizedImage
 ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
