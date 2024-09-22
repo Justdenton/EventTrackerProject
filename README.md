@@ -4,11 +4,11 @@
 
 | **Homework - Skill Distillery** |
 |:-------------------------------:|
-|        Week 12 - Backend        |   
+|       Week 12 - Backend               |   
 | Week 13 - Frontend (JavaScript/AJAX)  |
-|    Week 14 - Frontend (Angular)        |    
-|-------------------------------------------|
-| The Expense Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, **Spring Boot**, and **Angular** the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. The current version replaces the JavaScript/AJAX front end with an Angular front-ned for improved functionality and user experience. |
+|   Week 14 - Frontend (Angular)        |    
+
+The Expense Tracker Project is a RESTful API designed to manage expenses. Built with **MySQL**, **Spring Data JPA**, **Spring Boot**, and **Angular** the application allows for a user to perform CRUD operations on expenses and organize them by categories and payment methods. The purpose of this project is to create a backend API that provides endpoints for interacting with expenses data. The current version replaces the JavaScript/AJAX front end with an Angular front-ned for improved functionality and user experience.
 
 ### **MySQL Workbench - Schema**
 <!-- #### **First weekend**
