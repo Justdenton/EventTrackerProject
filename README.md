@@ -1,5 +1,11 @@
 # **Expense Tracker**
 
+<!-- ![Expense Tracker logo](./images/ExpenseTracker_piggy_bank_from_Gemini1.jpeg) -->
+
+<p align="center">
+  <img src="./images/ExpenseTracker_piggy_bank_from_Gemini1.jpeg" alt="Expense Tracker logo" />
+</p>
+
 ## **Overview**
 
 | **Homework - Skill Distillery** |
