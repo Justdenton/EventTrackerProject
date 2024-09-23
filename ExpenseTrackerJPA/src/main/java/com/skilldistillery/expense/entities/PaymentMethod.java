@@ -21,7 +21,7 @@ public class PaymentMethod {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private int id;
 
-	@Column(name = "method_name") 
+	@Column(name = "method_name")  
 	private String name;
 
 	@JsonIgnore
