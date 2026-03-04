@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    container_name: expensetracker-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: expensetrackerdb
+      MYSQL_USER: expensetrackeradmin
+      MYSQL_PASSWORD: expensetrackeradmin
+      MYSQL_ROOT_PASSWORD: expensetrackeradmin
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./DB:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  mysql_data:
